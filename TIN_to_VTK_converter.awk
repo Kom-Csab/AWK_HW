@@ -48,7 +48,9 @@ NF == 0 || /#+/ {
 }
 
 #Első feltétellel leelenőrzöm, hogy a VERT sor bedolgozásra került-e már,
-#majd a második feltétellel pedig azt szabom meg, hogy mennyi csúcspontokat tartalmazó sor van
+#majd a második feltétellel pedig azt szabom meg, hogy mennyi csúcspontokat tartalmazó sor van.
+#Továbbá muszáj egy hibaellenőrző boolean-t is használnom, mivel ha volt hiba a mennyiség feldolgozásakor,
+#akkor nem akarom kiíratni a koordinátákat tartalmazó sorokat.
 
 (is_vert_proc && FNR <= vertices_record_index + vert_amount) && error_check == 0{   
     print $1, $2, $3
@@ -84,7 +86,7 @@ NF == 0 || /#+/ {
 #hogy mennyi cella reprezentálja a háromszögeket.
 #Az "5" érték a VTK-ban azonosítja a háromszöget
 
-is_tri_proc{
+is_tri_proc && error_check == 0{
     print ""
     print "CELL_TYPES", tri_amount
     for(i=1; i<=tri_amount; i++){
