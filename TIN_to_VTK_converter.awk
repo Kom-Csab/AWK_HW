@@ -20,7 +20,7 @@ NF == 0 || /#+/ {
 }
 
 /^VERT/ {
-    count += 1
+    count++
     vert_amount = $2
     is_vert_proc = 1
     vertices_record_index = FNR
@@ -75,7 +75,7 @@ NF == 0 || /#+/ {
     next
 }
 
-#Ugyanaz a logika, mint a 26. sorban
+#Ugyanaz a logika, mint az 55. sorban
 
 (is_tri_proc && FNR <= triangles_row_index + tri_amount) && error_check == 0{
     print "3", $1, $2, $3
@@ -84,7 +84,7 @@ NF == 0 || /#+/ {
 
 #Az UNSTRUCTURED_GRID DATASET-ben az ismereteim szerint a fájl végén fel van tüntetve,
 #hogy mennyi cella reprezentálja a háromszögeket.
-#Az "5" érték a VTK-ban azonosítja a háromszöget
+#Az "5" érték pedig a VTK-ban a háromszöget azonosítja
 
 is_tri_proc && error_check == 0{
     print ""
