@@ -10,7 +10,7 @@ BEGIN {
 }
 
 NF == 0 || /#+/ {
-    NR--
+    FNR--
     next
 }
 
